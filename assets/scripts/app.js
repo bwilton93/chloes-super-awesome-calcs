@@ -69,6 +69,11 @@ const logInfo = () => {
   console.log(pensionableService);
 };
 
-
+const printOutput = () => {
+  let outputDiv = document.createElement("div");
+  let nameNode = document.createTextNode(clientName.value);
+  outputDiv.append(nameNode);
+  document.body.append(outputDiv);
+};
 
 submitBtn.addEventListener("click", runCalculations);
