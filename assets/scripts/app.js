@@ -10,6 +10,7 @@ let accrualDenominator = document.getElementById("accrual-rate-denominator");
 let submitBtn = document.getElementById("submit-btn");
 
 let pensionableService;
+let pensionAtDol;
 
 const monthsAndDays = {
   1: 31,
@@ -37,6 +38,7 @@ const onSubmit = () => {
 const runCalculations = () => {
   convertAllDates();
   pensionableService = calculatePensionableService(joinDate, leaveDate);
+  pensionAtDol = calculatePensionAtDOL(pensionableService);
   logInfo();
   printOutput();
 };
@@ -67,6 +69,15 @@ const calculatePensionableService = (joinDate, leaveDate) => {
     years: monthDifference < 0 ? yearDifference - 1 : yearDifference,
     months: monthDifference < 0 ? 12 + monthDifference : monthDifference,
   };
+};
+
+const calculatePensionAtDOL = (input) => {
+  let pensionableServCalc = input.years + input.months / 12;
+  return (
+    pensionableServCalc *
+    (accrualNumerator.value / accrualDenominator.value) *
+    finalPensionableSalary.value
+  );
 };
 
 const logInfo = () => {
@@ -141,6 +152,14 @@ const createPensionableServicesNode = (input) => {
   return div;
 };
 
+const createPensionAtDOLNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "pension-at-dol-output");
+  const node = document.createTextNode(input);
+  div.appendChild(node);
+  return div;
+};
+
 const printOutput = () => {
   const outputDiv = document.createElement("div");
   outputDiv.setAttribute("id", "output-formatted");
@@ -153,6 +172,7 @@ const printOutput = () => {
     createFinalPensionableSalaryNode(finalPensionableSalary.value),
     createAccrualNode(accrualNumerator.value, accrualDenominator.value),
     createPensionableServicesNode(pensionableService),
+    createPensionAtDOLNode(pensionAtDol),
   ];
 
   for (node of nodes) {
