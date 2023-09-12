@@ -128,7 +128,13 @@ const createAccrualNode = (numerator, denominator) => {
 const createPensionableServicesNode = (input) => {
   const div = document.createElement("div");
   div.setAttribute("id", "pensionable-services-output");
-  const node = document.createTextNode(input);
+  const node = document.createTextNode(
+    `Years: ${input.years}` +
+      " " +
+      `Months: ${input.months}` +
+      " " +
+      `${input.years + input.months / 12}`
+  );
   div.appendChild(node);
   return div;
 };
