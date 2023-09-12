@@ -120,7 +120,7 @@ const createFinalPensionableSalaryNode = (input) => {
 const createAccrualNode = (numerator, denominator) => {
   const div = document.createElement("div");
   div.setAttribute("id", "accrual-output");
-  const node = document.createTextNode(`${numerator} / ${denominator}`);
+  const node = document.createTextNode(`${numerator.value} / ${denominator.value}`);
   div.appendChild(node);
   return div;
 };
