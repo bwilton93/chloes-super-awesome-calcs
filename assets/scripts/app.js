@@ -1,17 +1,3 @@
-let clientName = document.getElementById("name");
-let dateOfBirth = document.getElementById("date-of-birth");
-let joinDate = document.getElementById("date-joining-service");
-let leaveDate = document.getElementById("date-leaving-service");
-let finalPensionableSalary = document.getElementById(
-  "final-pensionable-salary"
-);
-let accrualNumerator = document.getElementById("accrual-rate-numerator");
-let accrualDenominator = document.getElementById("accrual-rate-denominator");
-let submitBtn = document.getElementById("submit-btn");
-
-let pensionableService;
-let pensionAtDol;
-
 const monthsAndDays = {
   1: 31,
   2: 28,
@@ -26,6 +12,20 @@ const monthsAndDays = {
   11: 30,
   12: 31,
 };
+
+let clientName = document.getElementById("name");
+let dateOfBirth = document.getElementById("date-of-birth");
+let joinDate = document.getElementById("date-joining-service");
+let leaveDate = document.getElementById("date-leaving-service");
+let finalPensionableSalary = document.getElementById(
+  "final-pensionable-salary"
+);
+let accrualNumerator = document.getElementById("accrual-rate-numerator");
+let accrualDenominator = document.getElementById("accrual-rate-denominator");
+let submitBtn = document.getElementById("submit-btn");
+
+let pensionableService;
+let pensionAtDol;
 
 const onSubmit = () => {
   const outputDiv = document.getElementById("output-formatted");
