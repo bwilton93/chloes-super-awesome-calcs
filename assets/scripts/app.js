@@ -53,7 +53,6 @@ const convertToDate = (input) => {
 
 const calculatePensionableService = (joinDate, leaveDate) => {
   let yearDifference = leaveDate.getFullYear() - joinDate.getFullYear();
-
   let monthDifference = leaveDate.getMonth() - joinDate.getMonth();
 
   if (
@@ -64,7 +63,10 @@ const calculatePensionableService = (joinDate, leaveDate) => {
     monthDifference -= 1;
   }
 
-  return { years: yearDifference, months: monthDifference };
+  return {
+    years: monthDifference < 0 ? yearDifference - 1 : yearDifference,
+    months: monthDifference < 0 ? 12 + monthDifference : monthDifference,
+  };
 };
 
 const logInfo = () => {
