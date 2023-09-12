@@ -13,17 +13,20 @@ const monthsAndDays = {
   12: 31,
 };
 
-let clientName = document.getElementById("name");
-let dateOfBirth = document.getElementById("date-of-birth");
-let joinDate = document.getElementById("date-joining-service");
-let leaveDate = document.getElementById("date-leaving-service");
-let finalPensionableSalary = document.getElementById(
+const clientName = document.getElementById("name");
+const dateOfBirthElement = document.getElementById("date-of-birth");
+const joinDateElement = document.getElementById("date-joining-service");
+const leaveDateElement = document.getElementById("date-leaving-service");
+const finalPensionableSalary = document.getElementById(
   "final-pensionable-salary"
 );
-let accrualNumerator = document.getElementById("accrual-rate-numerator");
-let accrualDenominator = document.getElementById("accrual-rate-denominator");
-let submitBtn = document.getElementById("submit-btn");
+const accrualNumerator = document.getElementById("accrual-rate-numerator");
+const accrualDenominator = document.getElementById("accrual-rate-denominator");
+const submitBtn = document.getElementById("submit-btn");
 
+let dateOfBirth;
+let joinDate;
+let leaveDate;
 let pensionableService;
 let pensionAtDol;
 
@@ -44,9 +47,9 @@ const runCalculations = () => {
 };
 
 const convertAllDates = () => {
-  dateOfBirth = convertToDate(dateOfBirth);
-  joinDate = convertToDate(joinDate);
-  leaveDate = convertToDate(leaveDate);
+  dateOfBirth = convertToDate(dateOfBirthElement);
+  joinDate = convertToDate(joinDateElement);
+  leaveDate = convertToDate(leaveDateElement);
 };
 
 const convertToDate = (input) => {
