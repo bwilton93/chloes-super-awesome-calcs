@@ -9,23 +9,66 @@ let accrualNumerator = document.getElementById("accrual-rate-numerator");
 let accrualDenominator = document.getElementById("accrual-rate-denominator");
 let submitBtn = document.getElementById("submit-btn");
 
-const RunCalculations = () => {
+let pensionableService;
+
+const monthsAndDays = {
+  1: 31,
+  2: 28,
+  3: 31,
+  4: 30,
+  5: 31,
+  6: 30,
+  7: 31,
+  8: 31,
+  9: 30,
+  10: 31,
+  11: 30,
+  12: 31,
+};
+
+const runCalculations = () => {
+  convertAllDates();
+  pensionableService = calculatePensionableService(joinDate, leaveDate);
+  logInfo();
+  printOutput();
+};
+
+const convertAllDates = () => {
   dateOfBirth = convertToDate(dateOfBirth);
   joinDate = convertToDate(joinDate);
+  leaveDate = convertToDate(leaveDate);
 };
 
 const convertToDate = (input) => {
   return new Date(input.value);
 };
 
-var logInfo = function () {
-  console.log(clientName.value);
-  console.log(dateOfBirth.value);
-  console.log(joinDate);
-  console.log(typeof joinDate);
-  console.log(leaveDate.value);
-  console.log(finalPensionableSalary.value);
-  console.log(`${accrualNumerator.value} / ${accrualDenominator.value}`);
+const calculatePensionableService = (joinDate, leaveDate) => {
+  let yearDifference = leaveDate.getFullYear() - joinDate.getFullYear();
+
+  let monthDifference = leaveDate.getMonth() - joinDate.getMonth();
+
+  if (
+    leaveDate.getDate() !== monthsAndDays[leaveDate.getMonth() + 1] &&
+    joinDate.getDate() > leaveDate.getDate() &&
+    joinDate.getMonth() !== leaveDate.getMonth()
+  ) {
+    monthDifference -= 1;
+  }
+
+  return { years: yearDifference, months: monthDifference };
 };
 
-submitBtn.addEventListener("click", RunCalculations);
+const logInfo = () => {
+  console.log(clientName.value);
+  console.log(dateOfBirth);
+  console.log(joinDate);
+  console.log(leaveDate);
+  console.log(finalPensionableSalary.value);
+  console.log(`${accrualNumerator.value} / ${accrualDenominator.value}`);
+  console.log(pensionableService);
+};
+
+
+
+submitBtn.addEventListener("click", runCalculations);
