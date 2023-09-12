@@ -120,7 +120,7 @@ const createFinalPensionableSalaryNode = (input) => {
 const createAccrualNode = (numerator, denominator) => {
   const div = document.createElement("div");
   div.setAttribute("id", "accrual-output");
-  const node = document.createTextNode(`${numerator.value} / ${denominator.value}`);
+  const node = document.createTextNode(`${numerator} / ${denominator}`);
   div.appendChild(node);
   return div;
 };
@@ -149,7 +149,7 @@ const printOutput = () => {
     createJoinDateNode(joinDate),
     createLeaveDateNode(leaveDate),
     createFinalPensionableSalaryNode(finalPensionableSalary.value),
-    createAccrualNode(accrualNumerator, accrualDenominator),
+    createAccrualNode(accrualNumerator.value, accrualDenominator.value),
     createPensionableServicesNode(pensionableService),
   ];
 
