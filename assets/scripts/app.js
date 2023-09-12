@@ -178,8 +178,12 @@ const printOutput = () => {
     createPensionAtDOLNode(pensionAtDol),
   ];
 
-  for (node of nodes) {
-    outputDiv.append(node);
+  if (pensionableService.years < 0) {
+    outputDiv.append(document.createTextNode('Leave year must be after join year'))
+  } else {
+    for (node of nodes) {
+      outputDiv.append(node);
+    }
   }
 
   document.body.append(outputDiv);
