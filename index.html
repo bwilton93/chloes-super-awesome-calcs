@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="assets/scripts/app.js" defer></script>
+  </head>
+  <body>
+    <form>
+      <label for="name">Name</label>
+      <input id="name" type="text">
+      <label for="date-of-birth">DOB</label>
+      <input id="date-of-birth" type="date"><br>
+      <label for="date-joining-service">Date joining service</label>
+      <input id="date-joining-service" type="date">
+      <label for="date-leaving-service">Date leaving service</label>
+      <input id="date-leaving-service" type="date"><br>
+      <label for="final-pensionable-salary">FPS</label>
+      <input id="final-pensionable-salary" type="number"><br>
+      <div id="accrual-rate">
+        Accrual rate
+        <input id="accrual-rate-numerator" type="number"> / <input id="accrual-rate-denominator" type="number">
+      </div>
+      <input id="submit-btn" type="button" value="Submit">
+    </form>
+  </body>
+</html>
+
+<!-- Name:
+Scheme:
+DOB:
+DJS (date joining service):
+DLS (date leaving service):
+PS (pensionable service which is just difference between DJS and DLS) I’ll need pensionable service to have two…options? Modifiers? So some schemes use the difference in years and whole months, some use years and full days, some count partial months) but for simplicity sake maybe just start with days and complete months? Needing it to print in decimal format and word format  I.e. 3 years 2 months | = 3+2/12
+FPS (final pensionable salary):
+Accrual Rate: 
+Pension at DOL: (which is pensionable service X accrual rate X final pensionable salary -->
