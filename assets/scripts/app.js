@@ -26,6 +26,14 @@ const monthsAndDays = {
   12: 31,
 };
 
+const onSubmit = () => {
+  const outputDiv = document.getElementById("output-formatted");
+  if (outputDiv) {
+    outputDiv.remove();
+  }
+  runCalculations();
+};
+
 const runCalculations = () => {
   convertAllDates();
   pensionableService = calculatePensionableService(joinDate, leaveDate);
@@ -69,11 +77,81 @@ const logInfo = () => {
   console.log(pensionableService);
 };
 
+const createClientNameNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "client-name-output");
+  const node = document.createTextNode(input);
+  div.appendChild(node);
+  return div;
+};
+
+const createDOBNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "dob-output");
+  const node = document.createTextNode(input);
+  div.appendChild(node);
+  return div;
+};
+
+const createJoinDateNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "join-date-output");
+  const node = document.createTextNode(input);
+  div.appendChild(node);
+  return div;
+};
+
+const createLeaveDateNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "leave-date-output");
+  const node = document.createTextNode(input);
+  div.appendChild(node);
+  return div;
+};
+
+const createFinalPensionableSalaryNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "final-pensionable-salary-output");
+  const node = document.createTextNode(input);
+  div.appendChild(node);
+  return div;
+};
+
+const createAccrualNode = (numerator, denominator) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "accrual-output");
+  const node = document.createTextNode(`${numerator} / ${denominator}`);
+  div.appendChild(node);
+  return div;
+};
+
+const createPensionableServicesNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "pensionable-services-output");
+  const node = document.createTextNode(input);
+  div.appendChild(node);
+  return div;
+};
+
 const printOutput = () => {
-  let outputDiv = document.createElement("div");
-  let nameNode = document.createTextNode(clientName.value);
-  outputDiv.append(nameNode);
+  const outputDiv = document.createElement("div");
+  outputDiv.setAttribute("id", "output-formatted");
+
+  let nodes = [
+    createClientNameNode(clientName.value),
+    createDOBNode(dateOfBirth),
+    createJoinDateNode(joinDate),
+    createLeaveDateNode(leaveDate),
+    createFinalPensionableSalaryNode(finalPensionableSalary.value),
+    createAccrualNode(accrualNumerator, accrualDenominator),
+    createPensionableServicesNode(pensionableService),
+  ];
+
+  for (node of nodes) {
+    outputDiv.append(node);
+  }
+
   document.body.append(outputDiv);
 };
 
-submitBtn.addEventListener("click", runCalculations);
+submitBtn.addEventListener("click", onSubmit);
