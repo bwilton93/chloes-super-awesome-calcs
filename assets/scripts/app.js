@@ -36,14 +36,14 @@ const onSubmit = () => {
     outputDiv.remove();
   }
   runCalculations();
+  logInfo();
+  printOutput();
 };
 
 const runCalculations = () => {
   convertAllDates();
   pensionableService = calculatePensionableService(joinDate, leaveDate);
   pensionAtDol = calculatePensionAtDOL(pensionableService);
-  logInfo();
-  printOutput();
 };
 
 const convertAllDates = () => {
