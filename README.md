@@ -2,4 +2,4 @@
 
 Just stuff to make Chloe's life easier.
 
-Access at https://bwilton93.github.io/chloes-super-awesome-calcs/
+Access at [Opens in new tab](https://bwilton93.github.io/chloes-super-awesome-calcs/)
