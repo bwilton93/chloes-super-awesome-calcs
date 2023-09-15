@@ -97,6 +97,21 @@ const logInfo = () => {
   console.log(pensionableService);
 };
 
+const formatOutputDate = (input) => {
+  const dayString = String(input.getDate());
+  const monthString = String(input.getMonth());
+  const year = input.getFullYear();
+  return (
+    dayString.padStart(2, "0") + "/" + monthString.padStart(2, "0") + "/" + year
+  );
+};
+
+const formatPensionableService = (input) => {
+  return (
+    input.years + "y " + input.months + " months: " + pensionableService.years + pensionableService.months / 12
+  )
+}
+
 const createReferenceNode = (input) => {
   const div = document.createElement("div");
   div.setAttribute("id", "case-reference-output");
@@ -129,9 +144,10 @@ const createClientNameNode = (input) => {
 
 const createDOBNode = (input) => {
   const div = document.createElement("div");
+  div.setAttribute("class", "date-outputs");
   div.setAttribute("id", "dob-output");
   const node = document.createTextNode(
-    `DOB: ${input.getDate()}/${input.getMonth() + 1}/${input.getFullYear()}`
+    "DOB:            " + formatOutputDate(input)
   );
   div.appendChild(node);
   return div;
@@ -139,11 +155,10 @@ const createDOBNode = (input) => {
 
 const createJoinDateNode = (input) => {
   const div = document.createElement("div");
+  div.setAttribute("class", "date-outputs");
   div.setAttribute("id", "join-date-output");
   const node = document.createTextNode(
-    `Date Joined: ${input.getDate()}/${
-      input.getMonth() + 1
-    }/${input.getFullYear()}`
+    "Date Joined: " + formatOutputDate(input)
   );
   div.appendChild(node);
   return div;
@@ -151,13 +166,10 @@ const createJoinDateNode = (input) => {
 
 const createLeaveDateNode = (leaveDate, pensionableService) => {
   const div = document.createElement("div");
+  div.setAttribute("class", "date-outputs");
   div.setAttribute("id", "leave-date-output");
   const node = document.createTextNode(
-    `Date Left: ${leaveDate.getDate()}/${
-      leaveDate.getMonth() + 1
-    }/${leaveDate.getFullYear()}: ${pensionableService.years}y 
-    ${pensionableService.months} 
-    months: ${pensionableService.years + pensionableService.months / 12}`
+    "Date Left:     " + formatOutputDate(leaveDate) + ": " + formatPensionableService(pensionableService)
   );
   div.appendChild(node);
   return div;
