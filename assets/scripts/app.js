@@ -13,6 +13,8 @@ const monthsAndDays = {
   12: 31,
 };
 
+const caseReference = document.getElementById("case-ref");
+const schemeName = document.getElementById("scheme");
 const clientName = document.getElementById("name");
 const dateOfBirthElement = document.getElementById("date-of-birth");
 const joinDateElement = document.getElementById("date-joining-service");
@@ -84,6 +86,8 @@ const calculatePensionAtDOL = (input) => {
 };
 
 const logInfo = () => {
+  console.log(schemeName.value);
+  console.log(caseReference.value);
   console.log(clientName.value);
   console.log(dateOfBirth);
   console.log(joinDate);
@@ -91,6 +95,26 @@ const logInfo = () => {
   console.log(finalPensionableSalary.value);
   console.log(`${accrualNumerator.value} / ${accrualDenominator.value}`);
   console.log(pensionableService);
+};
+
+const createReferenceNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "case-reference-output");
+  const bold = document.createElement("strong");
+  const node = document.createTextNode(input);
+  bold.appendChild(node);
+  div.appendChild(bold);
+  return div;
+};
+
+const createSchemeNode = (input) => {
+  const div = document.createElement("div");
+  div.setAttribute("id", "scheme-name-output");
+  const bold = document.createElement("strong");
+  const node = document.createTextNode(input);
+  bold.appendChild(node);
+  div.appendChild(bold);
+  return div;
 };
 
 const createClientNameNode = (input) => {
@@ -170,6 +194,8 @@ const printOutput = () => {
   outputDiv.setAttribute("id", "output-formatted");
 
   let nodes = [
+    createReferenceNode(caseReference.value),
+    createSchemeNode(schemeName.value),
     createClientNameNode(clientName.value),
     createDOBNode(dateOfBirth),
     createJoinDateNode(joinDate),
