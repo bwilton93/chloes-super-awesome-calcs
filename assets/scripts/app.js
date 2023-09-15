@@ -96,15 +96,19 @@ const logInfo = () => {
 const createClientNameNode = (input) => {
   const div = document.createElement("div");
   div.setAttribute("id", "client-name-output");
+  const bold = document.createElement("strong");
   const node = document.createTextNode(input);
-  div.appendChild(node);
+  bold.appendChild(node);
+  div.appendChild(bold);
   return div;
 };
 
 const createDOBNode = (input) => {
   const div = document.createElement("div");
   div.setAttribute("id", "dob-output");
-  const node = document.createTextNode(input);
+  const node = document.createTextNode(
+    `DOB: ${input.getDate()}/${input.getMonth() + 1}/${input.getFullYear()}`
+  );
   div.appendChild(node);
   return div;
 };
@@ -112,15 +116,25 @@ const createDOBNode = (input) => {
 const createJoinDateNode = (input) => {
   const div = document.createElement("div");
   div.setAttribute("id", "join-date-output");
-  const node = document.createTextNode(input);
+  const node = document.createTextNode(
+    `Date Joined: ${input.getDate()}/${
+      input.getMonth() + 1
+    }/${input.getFullYear()}`
+  );
   div.appendChild(node);
   return div;
 };
 
-const createLeaveDateNode = (input) => {
+const createLeaveDateNode = (leaveDate, pensionableService) => {
   const div = document.createElement("div");
   div.setAttribute("id", "leave-date-output");
-  const node = document.createTextNode(input);
+  const node = document.createTextNode(
+    `Date Left: ${leaveDate.getDate()}/${
+      leaveDate.getMonth() + 1
+    }/${leaveDate.getFullYear()}: ${pensionableService.years}y 
+    ${pensionableService.months} 
+    months: ${pensionableService.years + pensionableService.months / 12}`
+  );
   div.appendChild(node);
   return div;
 };
@@ -128,37 +142,25 @@ const createLeaveDateNode = (input) => {
 const createFinalPensionableSalaryNode = (input) => {
   const div = document.createElement("div");
   div.setAttribute("id", "final-pensionable-salary-output");
-  const node = document.createTextNode(input);
+  const node = document.createTextNode(`FPS: ${input}`);
   div.appendChild(node);
   return div;
 };
 
-const createAccrualNode = (numerator, denominator) => {
-  const div = document.createElement("div");
-  div.setAttribute("id", "accrual-output");
-  const node = document.createTextNode(`${numerator} / ${denominator}`);
-  div.appendChild(node);
-  return div;
-};
-
-const createPensionableServicesNode = (input) => {
-  const div = document.createElement("div");
-  div.setAttribute("id", "pensionable-services-output");
-  const node = document.createTextNode(
-    `Years: ${input.years}` +
-      " " +
-      `Months: ${input.months}` +
-      " " +
-      `${input.years + input.months / 12}`
-  );
-  div.appendChild(node);
-  return div;
-};
-
-const createPensionAtDOLNode = (input) => {
+const createPensionAtDOLNode = (
+  pensionableService,
+  accrualNumerator,
+  accrualDenominator,
+  finalPensionableSalary,
+  pensionAtDol
+) => {
   const div = document.createElement("div");
   div.setAttribute("id", "pension-at-dol-output");
-  const node = document.createTextNode(input);
+  const node = document.createTextNode(
+    `Pension at exit: ${
+      pensionableService.years + pensionableService.months / 12
+    } x ${accrualNumerator}/${accrualDenominator} x ${finalPensionableSalary} = ${pensionAtDol}`
+  );
   div.appendChild(node);
   return div;
 };
@@ -171,15 +173,21 @@ const printOutput = () => {
     createClientNameNode(clientName.value),
     createDOBNode(dateOfBirth),
     createJoinDateNode(joinDate),
-    createLeaveDateNode(leaveDate),
+    createLeaveDateNode(leaveDate, pensionableService),
     createFinalPensionableSalaryNode(finalPensionableSalary.value),
-    createAccrualNode(accrualNumerator.value, accrualDenominator.value),
-    createPensionableServicesNode(pensionableService),
-    createPensionAtDOLNode(pensionAtDol),
+    createPensionAtDOLNode(
+      pensionableService,
+      accrualNumerator.value,
+      accrualDenominator.value,
+      finalPensionableSalary.value,
+      pensionAtDol
+    ),
   ];
 
   if (pensionableService.years < 0) {
-    outputDiv.append(document.createTextNode('Leave year must be after join year'))
+    outputDiv.append(
+      document.createTextNode("Leave year must be after join year")
+    );
   } else {
     for (node of nodes) {
       outputDiv.append(node);
