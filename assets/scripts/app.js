@@ -99,7 +99,7 @@ const logInfo = () => {
 
 const formatOutputDate = (input) => {
   const dayString = String(input.getDate());
-  const monthString = String(input.getMonth());
+  const monthString = String(input.getMonth() + 1);
   const year = input.getFullYear();
   return (
     dayString.padStart(2, "0") + "/" + monthString.padStart(2, "0") + "/" + year
@@ -108,9 +108,13 @@ const formatOutputDate = (input) => {
 
 const formatPensionableService = (input) => {
   return (
-    input.years + "y " + input.months + " months: " + pensionableService.years + pensionableService.months / 12
-  )
-}
+    input.years +
+    "y " +
+    input.months +
+    " months: " +
+    (pensionableService.years + pensionableService.months / 12)
+  );
+};
 
 const createReferenceNode = (input) => {
   const div = document.createElement("div");
@@ -169,7 +173,10 @@ const createLeaveDateNode = (leaveDate, pensionableService) => {
   div.setAttribute("class", "date-outputs");
   div.setAttribute("id", "leave-date-output");
   const node = document.createTextNode(
-    "Date Left:     " + formatOutputDate(leaveDate) + ": " + formatPensionableService(pensionableService)
+    "Date Left:     " +
+      formatOutputDate(leaveDate) +
+      ": " +
+      formatPensionableService(pensionableService)
   );
   div.appendChild(node);
   return div;
